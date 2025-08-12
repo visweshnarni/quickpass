@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 import { Bell, User } from 'lucide-react'
+import NotificationButton from '../dashboard/NotificationButton/notificationButton'
 
 export default function DashboardHeader() {
   const [open, setOpen] = useState(false) // dropdown open state
@@ -52,13 +53,13 @@ export default function DashboardHeader() {
       >
         {/* Centered App Name — truly centered on page */}
         <span
-          className="absolute left-1/2 transform -translate-x-1/2 font-bold text-white"
-          style={{
-            fontSize: '32px',
-            fontFamily: "'Albert Sans', sans-serif",
-            width: '185px',
-            display: 'inline-block',
-          }}
+          className="font-['Albert_Sans-Bold'] font-bold text-white text-[32px] absolute left-1/2 transform -translate-x-1/2 font-bold text-white"
+          // style={{
+          //   fontSize: '32px',
+          //   fontFamily: "'Albert Sans', sans-serif",
+          //   width: '185px',
+          //   display: 'inline-block',
+          // }}
         >
           QUICKPASS
         </span>
@@ -66,12 +67,7 @@ export default function DashboardHeader() {
         {/* Right-Side Icons */}
         <div className="ml-auto flex items-center gap-[24px] mr-3">
           {/* Notification Bell */}
-          <button
-            aria-label="Notifications"
-            className="p-0 bg-transparent hover:bg-transparent focus:outline-none text-white hover:opacity-50 transition-opacity"
-          >
-            <Bell className="w-[36px] h-[36px]" />
-          </button>
+          <NotificationButton/>
 
           {/* Profile Dropdown */}
           <div className="relative" ref={dropdownRef}>

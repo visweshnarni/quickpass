@@ -36,9 +36,9 @@ export default function Box() {
   return (
     <main className="flex flex-col min-h-screen items-center bg-white">
       {/* Header and Body sections are now a single, responsive flow */}
-      <div className="w-full">
+      <header className="w-full px-3 my-3 space-y-3">
         {/* Title header image */}
-        <header>
+        <div>
           <Image
             src="/images/title.png"
             alt="Title header"
@@ -47,19 +47,19 @@ export default function Box() {
             className="w-full h-auto"
             priority
           />
-        </header>
 
-        {/* Body content image */}
-        <section>
-          <Image
+
+          {/* Body content image */}
+
+          {/* <Image
             src="/images/body1.png"
             alt="Body content"
             width={1242}
             height={178}
             className="w-full h-auto"
-          />
-        </section>
-        
+          /> */}
+        </div>
+
         {/* Divider image, now correctly placed in the flow */}
         <div className="w-full">
           <Image
@@ -70,21 +70,21 @@ export default function Box() {
             className="w-full h-auto"
           />
         </div>
-      </div>
+      </header>
 
       {/* Green banner, made responsive */}
-      <div className="w-full bg-[#1f8941] flex justify-center items-center py-3">
-        <h1 className="font-['Albert_Sans-Bold'] font-bold text-white text-2xl sm:text-3xl">
+      <div className="w-full   px-3 ">
+        <h1 className="w-full bg-[#1f8941] flex justify-center items-center font-['Albert_Sans-Bold'] font-bold text-white text-2xl sm:text-3xl py-3">
           QUICKPASS
         </h1>
       </div>
 
       {/* Login cards */}
-      <div className="w-full flex flex-wrap justify-center gap-6 py-6 px-4 md:px-8 lg:px-12">
+      <div className="w-full  flex flex-wrap justify-evenly items-center grow py-6 md:px-8 lg:px-12">
         {loginCards.map((card) => (
           <section
             key={card.id}
-            className="w-full sm:w-[calc(50%-12px)] md:w-[300px] bg-[#fffefc] rounded-lg border border-[#bebab9] shadow-md p-4"
+            className="w-full my-3 sm:w-[calc(50%-12px)] md:w-[300px] bg-[#fffefc] rounded-lg border border-[#bebab9] shadow-md p-4"
             aria-labelledby={`${card.id}-title`}
           >
             <h2 id={`${card.id}-title`} className="font-medium text-[#1f8941] text-2xl text-center mb-4">
@@ -155,7 +155,7 @@ export default function Box() {
       </div>
 
       {/* Footer */}
-      <footer className="w-full mt-auto">
+      <footer className="w-full mt-auto px-3 mb-3">
         <Image
           src="/bott.png"
           alt="Bottom background"

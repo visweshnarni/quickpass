@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import DashboardHeader from "@/app/components/common/DashboardHeader";
 import Sidebar from "@/app/components/common/Sidebar";
+import Footer from "@/app/components/common/Footer";
 
 export default function DashboardLayout({
   children,
@@ -40,6 +41,8 @@ export default function DashboardLayout({
           </AnimatePresence>
         </main>
       </div>
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }

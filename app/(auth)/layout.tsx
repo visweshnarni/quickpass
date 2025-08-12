@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 
 export const metadata: Metadata = {
-  description: "Login or Signup to Telangana Dental Council",
+  description: "Login or Signup to HITAM Quickpass",
 };
 
 export default function AuthLayout({
