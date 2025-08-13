@@ -1,4 +1,4 @@
-"use client"  
+"use client"
 
 import { useState } from "react";
 import Image from "next/image";
@@ -49,15 +49,7 @@ export default function Box() {
           />
 
 
-          {/* Body content image */}
 
-          {/* <Image
-            src="/images/body1.png"
-            alt="Body content"
-            width={1242}
-            height={178}
-            className="w-full h-auto"
-          /> */}
         </div>
 
         {/* Divider image, now correctly placed in the flow */}
