@@ -9,6 +9,7 @@ export default function Box() {
   const [employeeForm, setEmployeeForm] = useState({ username: "", password: "" });
   const [adminForm, setAdminForm] = useState({ username: "", password: "" });
 
+  // Update the loginCards array to match the provided code
   const loginCards = [
     { id: "student", title: "Student Login", form: studentForm, setForm: setStudentForm, showIcons: true },
     { id: "employee", title: "Employee Login", form: employeeForm, setForm: setEmployeeForm, showIcons: true },
@@ -34,11 +35,11 @@ export default function Box() {
   };
 
   return (
-    <main className="flex flex-col min-h-screen items-center bg-white">
-      {/* Header and Body sections are now a single, responsive flow */}
+    <main className="flex flex-col min-h-screen items-center bg-gray-100 font-sans">
+      {/* Header section with responsive width */}
       <div className="w-full">
         {/* Title header image */}
-        <header>
+        <header className="relative w-full">
           <Image
             src="/images/title.png"
             alt="Title header"
@@ -50,7 +51,7 @@ export default function Box() {
         </header>
 
         {/* Body content image */}
-        <section>
+        <section className="relative w-full">
           <Image
             src="/images/body1.png"
             alt="Body content"
@@ -60,7 +61,7 @@ export default function Box() {
           />
         </section>
         
-        {/* Divider image, now correctly placed in the flow */}
+        {/* Divider image, now using a responsive class for correct placement */}
         <div className="w-full">
           <Image
             src="/line1.png"
@@ -72,19 +73,20 @@ export default function Box() {
         </div>
       </div>
 
-      {/* Green banner, made responsive */}
+      {/* Green banner, now with responsive padding and font sizing */}
       <div className="w-full bg-[#1f8941] flex justify-center items-center py-3">
         <h1 className="font-['Albert_Sans-Bold'] font-bold text-white text-2xl sm:text-3xl">
           QUICKPASS
         </h1>
       </div>
 
-      {/* Login cards */}
+      {/* Login cards container, using flex-wrap and gap for responsive layout */}
       <div className="w-full flex flex-wrap justify-center gap-6 py-6 px-4 md:px-8 lg:px-12">
         {loginCards.map((card) => (
           <section
             key={card.id}
-            className="w-full sm:w-[calc(50%-12px)] md:w-[300px] bg-[#fffefc] rounded-lg border border-[#bebab9] shadow-md p-4"
+            // Using max-w to control card size on larger screens and full width on smaller ones
+            className="w-full sm:w-[calc(50%-12px)] md:max-w-[300px] bg-[#fffefc] rounded-lg border border-[#bebab9] shadow-md p-6"
             aria-labelledby={`${card.id}-title`}
           >
             <h2 id={`${card.id}-title`} className="font-medium text-[#1f8941] text-2xl text-center mb-4">
@@ -98,12 +100,12 @@ export default function Box() {
               }}
               className="space-y-4"
             >
-              {/* Username */}
+              {/* Username field with responsive icon placement */}
               <div className="relative">
                 {card.showIcons && (
                   <User
                     size={20}
-                    className="absolute top-1/2 left-3 -translate-y-1/2 text-green-700"
+                    className="absolute top-1/2 left-3 -translate-y-1/2 text-gray-500"
                   />
                 )}
                 <input
@@ -111,17 +113,17 @@ export default function Box() {
                   value={card.form.username}
                   onChange={(e) => handleInputChange(card.id, "username", e.target.value)}
                   placeholder="Username"
-                  className={`w-full ${card.showIcons ? "pl-10" : "pl-4"} pr-4 py-2 border border-[#bebab9] rounded-lg`}
+                  className={`w-full ${card.showIcons ? "pl-10" : "pl-4"} pr-4 py-2 border border-[#bebab9] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1f8941]`}
                   required
                 />
               </div>
 
-              {/* Password */}
+              {/* Password field with responsive icon placement */}
               <div className="relative">
                 {card.showIcons && (
                   <Lock
                     size={20}
-                    className="absolute top-1/2 left-3 -translate-y-1/2 text-green-700"
+                    className="absolute top-1/2 left-3 -translate-y-1/2 text-gray-500"
                   />
                 )}
                 <input
@@ -129,15 +131,15 @@ export default function Box() {
                   value={card.form.password}
                   onChange={(e) => handleInputChange(card.id, "password", e.target.value)}
                   placeholder="Password"
-                  className={`w-full ${card.showIcons ? "pl-10" : "pl-4"} pr-4 py-2 border border-[#bebab9] rounded-lg`}
+                  className={`w-full ${card.showIcons ? "pl-10" : "pl-4"} pr-4 py-2 border border-[#bebab9] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1f8941]`}
                   required
                 />
               </div>
 
-              {/* Login Button */}
+              {/* Login Button with responsive styling */}
               <button
                 type="submit"
-                className="w-full bg-[#1f8941] text-white py-2 rounded-lg text-lg hover:bg-[#1a7a39]"
+                className="w-full bg-[#1f8941] text-white py-2 rounded-lg text-lg hover:bg-[#1a7a39] transition-colors"
               >
                 Login
               </button>
@@ -146,7 +148,7 @@ export default function Box() {
             <button
               type="button"
               onClick={() => handleForgotPassword(card.id)}
-              className="block mt-3 mx-auto text-sm hover:text-[#1f8941]"
+              className="block mt-3 mx-auto text-sm text-gray-600 hover:text-[#1f8941] hover:underline transition-colors"
             >
               Forgot Password
             </button>
@@ -154,7 +156,7 @@ export default function Box() {
         ))}
       </div>
 
-      {/* Footer */}
+      {/* Footer, now with no content */}
       <footer className="w-full mt-auto">
         <Image
           src="/bott.png"
