@@ -1,4 +1,4 @@
-"use client";
+"use client"  
 
 import { useState } from "react";
 import Image from "next/image";
@@ -34,7 +34,7 @@ export default function Box() {
   };
 
   return (
-    <main className="flex flex-col min-h-screen items-center bg-white">
+    <main className="flex flex-col min-h-screen items-center bg-white overscroll-none">
       {/* Header and Body sections are now a single, responsive flow */}
       <header className="w-full px-3 my-3 space-y-3">
         {/* Title header image */}
