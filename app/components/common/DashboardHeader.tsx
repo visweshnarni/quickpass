@@ -2,19 +2,17 @@
 
 import { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
-import { ChevronDown } from 'lucide-react'
+import { Bell, User } from 'lucide-react'
+import NotificationButton from '../dashboard/NotificationButton/notificationButton'
 
 export default function DashboardHeader() {
-  const [open, setOpen] = useState(false)
-  const dropdownRef = useRef<HTMLDivElement>(null)
+  const [open, setOpen] = useState(false) // dropdown open state
+  const dropdownRef = useRef<HTMLDivElement | null>(null) // ref for dropdown click detection
 
-  // Close dropdown on outside click
+  // Close profile dropdown when clicking outside
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
         setOpen(false)
       }
     }
@@ -23,80 +21,95 @@ export default function DashboardHeader() {
   }, [])
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 w-full h-20 bg-[#FFFFFF] border-b border-gray-200 px-6 flex items-center justify-between font-poppins shadow">
-      {/* Left: Logo */}
-      <div className="flex items-center space-x-3">
+    <header
+      className="w-full font-poppins space-y-3 mt-3 mb-3 p-0 px-3"
+       // top spacing from other sections
+    >
+
+      {/* ---------- Banner Section (full width, no cropping) ---------- */}
+      <div className="relative w-full bg-black">
         <Image
-          src="/images/header-logo1.png"
-          alt="Telangana Dental Council Logo"
-          width={180}
-          height={40}
-          className="h-auto w-auto object-contain"
+          src="/images/title.png"
+          alt="Banner"
+          width={1920}
+          height={500}
+          style={{
+            width: '100%',
+            height: 'auto',
+            objectFit: 'contain', // keeps entire image visible
+          }}
+          priority
         />
       </div>
 
-      {/* Right: Profile Dropdown */}
-      <div className="relative" ref={dropdownRef}>
-        <button
-          onClick={() => setOpen((prev) => !prev)}
-          className="flex items-center gap-2 focus:outline-none"
-          aria-expanded={open}
-          aria-haspopup="true"
+      {/* ---------- Horizontal Divider Between Banner & Nav ---------- */}
+      <div className="w-full border-t border-gray-400"></div>
+
+
+      {/* ---------- Navigation Bar Section ---------- */}
+      <div
+        className="relative w-full bg-[#1F8941] border-b border-gray-200 flex items-center"
+        style={{ height: '50px' }}
+      >
+        {/* Centered App Name — truly centered on page */}
+        <span
+          className="font-['Albert_Sans-Bold'] font-bold text-white text-[32px] absolute left-1/2 transform -translate-x-1/2 font-bold text-white"
+          // style={{
+          //   fontSize: '32px',
+          //   fontFamily: "'Albert Sans', sans-serif",
+          //   width: '185px',
+          //   display: 'inline-block',
+          // }}
         >
-          <Image
-            src="/images/dravatar.jpg"
-            alt="User Avatar"
-            width={40}
-            height={40}
-            className="rounded-full border border-gray-300"
-          />
-          <ChevronDown className="text-gray-600 w-4 h-4" />
-        </button>
+          QUICKPASS
+        </span>
 
-        {/* Dropdown */}
-        {open && (
-          <div className="absolute right-0 mt-2 w-64 bg-white rounded-md shadow-lg z-50 border border-gray-200">
-            {/* User Info */}
-            <div className="flex items-center space-x-3 px-4 py-3 border-b">
-              <Image
-                src="/images/dravatar.jpg"
-                alt="User Avatar"
-                width={40}
-                height={40}
-                className="rounded-full border"
-              />
-              <div>
-                <p className="text-sm font-semibold text-gray-800 leading-tight">
-                  STAFF-1
-                </p>
-                
+        {/* Right-Side Icons */}
+        <div className="ml-auto flex items-center gap-[24px] mr-3">
+          {/* Notification Bell */}
+          <NotificationButton/>
+
+          {/* Profile Dropdown */}
+          <div className="relative" ref={dropdownRef}>
+            <button
+              onClick={() => setOpen((s) => !s)}
+              aria-expanded={open}
+              aria-haspopup="true"
+              className="p-0 bg-transparent hover:bg-transparent focus:outline-none text-white hover:opacity-50 transition-opacity"
+            >
+              <User className="w-[36px] h-[36px]" />
+            </button>
+
+            {open && (
+              <div className="absolute right-0 mt-2 w-56 bg-white rounded-md shadow-lg z-50 border border-gray-200">
+                <div className="divide-y">
+                  <button
+                    className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
+                    onClick={() => {
+                      console.log('Go to Profile Settings')
+                      setOpen(false)
+                    }}
+                  >
+                    Profile Settings
+                  </button>
+                  <button
+                    className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
+                    onClick={() => {
+                      console.log('Logout')
+                      setOpen(false)
+                    }}
+                  >
+                    Logout
+                  </button>
+                </div>
               </div>
-            </div>
-
-            {/* Actions */}
-            <div className="divide-y">
-              <button
-                className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
-                onClick={() => {
-                  // Add routing logic here
-                  console.log("Go to Profile Settings");
-                }}
-              >
-                Profile Settings
-              </button>
-              <button
-                className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
-                onClick={() => {
-                  // Add logout logic here
-                  console.log("Logout");
-                }}
-              >
-                Logout
-              </button>
-            </div>
+            )}
           </div>
-        )}
+        </div>
       </div>
+      {/* ---------- Horizontal Divider Between nav & side-bar ---------- */}
+      <div className="w-full border-t border-gray-400"></div>
+
     </header>
-  );
+  )
 }
